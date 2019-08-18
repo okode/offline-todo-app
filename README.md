@@ -5,6 +5,11 @@ Ionic Shared List stored on PouchDB / CouchDB:
 * CouchDB Backend
 * Ionic Frontend with PouchDB
 
+## Requirements
+
+* Ionic
+* Docker
+
 ## Building and Running
 
 * Backend build & run
