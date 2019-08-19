@@ -1,6 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Item } from '../models/item';
-import * as PouchDB from 'pouchdb';
+import PouchDB from 'pouchdb';
 import { Observable } from 'rxjs';
 
 @Injectable({
