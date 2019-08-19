@@ -52,12 +52,36 @@ export class HomePage implements OnInit {
     alert.present();
   }
 
-  edit(item: Item) {
-    console.log('Edit not implemented');
+  async edit(item: Item) {
+    const alert = await this.alertCtrl.create({
+      header: 'Edit item',
+      inputs: [
+        {
+          name: 'title',
+          placeholder: 'Title',
+          value: item.title
+        },
+        {
+          name: 'description',
+          placeholder: 'Description',
+          value: item.description
+        }],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Save',
+          handler: (newItem: Item) => { newItem._id = item._id; newItem._rev = item._rev; this.itemsService.update(newItem); }
+        }
+      ]
+    });
+    alert.present();
   }
 
   remove(item: Item) {
-    console.log('Delete not implemented');
+    this.itemsService.remove(item);
   }
 
 }
