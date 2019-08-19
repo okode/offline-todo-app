@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Item } from '../../models/item';
 import { ItemsService } from '../../services/items.service';
 import { AlertController } from '@ionic/angular';
@@ -8,14 +8,23 @@ import { AlertController } from '@ionic/angular';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
-  readonly items: Item[] = [];
+  items: Item[] = [];
 
   constructor(
     private alertCtrl: AlertController,
     private itemsService: ItemsService
-    ) {}
+  ) {}
+
+  ngOnInit() {
+    this.itemsService.changes().subscribe(() => { this.refresh(); });
+    this.refresh();
+  }
+
+  private refresh() {
+    this.itemsService.findAll().then(docs => { this.items = docs; });
+  }
 
   async add() {
     const alert = await this.alertCtrl.create({

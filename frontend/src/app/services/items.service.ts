@@ -33,8 +33,9 @@ export class ItemsService {
 
   changes() {
     return new Observable<void>(subscriber => {
-      this.db.changes({ live: true, since: 'now' })
-      .on('change', change => { this.zone.run(() => { subscriber.next(); }); });
+      this.db
+        .changes({ live: true, since: 'now' })
+        .on('change', _ => { this.zone.run(() => { subscriber.next(); }); });
     });
   }
 
