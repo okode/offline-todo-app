@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Item } from '../../models/item';
 import { ItemsService } from '../../services/items.service';
 import { AlertController } from '@ionic/angular';
@@ -6,7 +6,7 @@ import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  styleUrls: ['home.page.scss']
 })
 export class HomePage implements OnInit {
 
@@ -14,7 +14,8 @@ export class HomePage implements OnInit {
 
   constructor(
     private alertCtrl: AlertController,
-    private itemsService: ItemsService
+    private itemsService: ItemsService,
+    private changeDetetorRef: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -24,6 +25,7 @@ export class HomePage implements OnInit {
 
   private refresh() {
     this.itemsService.findAll().then(docs => { this.items = docs; });
+    this.changeDetetorRef.markForCheck();
   }
 
   async add() {

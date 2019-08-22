@@ -1,4 +1,4 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Item } from '../models/item';
 import PouchDB from 'pouchdb';
 import { Observable } from 'rxjs';
@@ -10,7 +10,7 @@ export class ItemsService {
 
   private readonly db = new PouchDB<Item>('items');
 
-  constructor(private zone: NgZone) {
+  constructor() {
     this.db.sync('http://localhost:5984/items', { live: true, retry: true });
   }
 
@@ -35,7 +35,7 @@ export class ItemsService {
     return new Observable<void>(subscriber => {
       this.db
         .changes({ live: true, since: 'now' })
-        .on('change', _ => { this.zone.run(() => { subscriber.next(); }); });
+        .on('change', _ => { subscriber.next(); });
     });
   }
 
