@@ -5,6 +5,8 @@ Ionic Shared List stored on PouchDB / CouchDB:
 * CouchDB Backend
 * Ionic Frontend with PouchDB
 
+![](pouchdb-pwa-video.gif)
+
 ## Requirements
 
 * Ionic
